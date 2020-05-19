@@ -1,0 +1,23 @@
+配置文件加载顺序：
+   1、默认
+   SpringBoot启动会扫描application.properties或者application.yml文件作为springboot的配置文件。
+   默认创建项目生成application.properties/yml位置在classpath目录下，也可以在以下4个地方创建，优先级自上而下，但是各个配置文件成互补状态存在。
+　　 * file: ./config/    根目录下建一个config文件夹/jar包同级目录下新建config文件夹
+　 　* file: ./           根目录/jar包同级目录下
+　 　* classpath: /config/   resource目录下建一个config文件夹
+　　 * classpath:/
+
+   优先级 properties>yml
+
+
+   自定义
+     @  Value    @ConfigurationProperties
+
+
+
+  profile 加载顺序
+
+       jar包外部的application-(profile).properties或application.yml(带spring.profile)配置文件
+       jar包内部的application-(profile).properties或application.yml(带spring.profile)配置文件
+       jar包外部的application.properties或application.yml(不带spring.profile)配置文件
+       jar包内部的application.properties或application.yml(不带spring.profile)配置文件

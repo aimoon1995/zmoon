@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project_study.my.logs.mapper.LogStorageMapper">
+
+	
+	<insert id="insertSystemLog" parameterType="com.project_study.my.logs.entity.SystemLogEntity">
+		INSERT INTO T_SYS_SYSTEM_LOG(
+			ID,
+			LOG_MESSAGE,
+			STACK_TRACE,
+			LOGGER,
+			LOG_LEVEL,
+			LOG_USER,
+			LOG_TIME,
+			CLIENT_IP,
+			SERVER_IP
+		)VALUES(
+			#{param.id},
+			#{param.logMessage},
+			#{param.stackTrace},
+			#{param.logger},
+			#{param.logLevel},
+			#{param.logUser},
+			SYSDATE(),
+			#{param.clientIp},
+			#{param.serverIp}
+		)
+	</insert>
+	
+
+</mapper>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<settings>
+	  	<!-- 指定JAVA空参数类型对应的JDBCTYPE，不指定为NULL时，数据库插入NULL时会报错  -->
+	  	<setting name="jdbcTypeForNull" value="NULL"/>
+		<!--解决当Result为Map时，查询返回结果含null没有对应字段值问题-->
+		<setting name="callSettersOnNulls" value="true"/>
+		<!-- 指定LOG前缀 -->
+	  	<setting name="logPrefix" value="dao."/>
+	  	<setting name="logImpl" value="SLF4J"/>
+	  	<!-- 当检测出未知列（或未知属性）时显示警告（开发时使用） -->
+	  	<setting name="autoMappingUnknownColumnBehavior" value="WARNING"/>
+	</settings>
+<!--	<plugins>-->
+<!--		<plugin interceptor="com.github.pagehelper.PageHelper">-->
+<!--			&lt;!&ndash; 默认方言, 禁用为了自动 &ndash;&gt;-->
+<!--			&lt;!&ndash; <property name="dialect" value="${db.default.dialect}"/>&ndash;&gt;-->
+<!--		</plugin>-->
+		<!-- 全局变量注入 -->
+<!--		<plugin interceptor="com.ithinkdt.plugin.mybatis.plugin.DynamicVariable">-->
+<!--			&lt;!&ndash; -->
+<!--				如果是通过parameterLocations加载的，文件名中含有dialect.，将会自动归档到对应方言的变量中-->
+<!--			           也可以将名称直接指定为dialect名称进行归档,如注释中的oracle-->
+<!--			     parameterLocations中加载的其他非dialect资源将作为全局变量加载-->
+<!--				类或者接口中的静态变量如果希望通过全局变量加载，可以在class使用注解@MybatisConstant,另外需要配置扫描的package-->
+<!--				如果不希望将变量作为全局变量引入，请对属性使用@Ignored-->
+<!--			 &ndash;&gt;-->
+<!--			&lt;!&ndash; 全局(方言)变量注入properties文件方式  ,支持通配符,可以使用,或者;进行分隔&ndash;&gt;-->
+<!--			<property name="parameterLocations" value="classpath*:conf/dao/dialect/dialect.*.properties"/>-->
+<!--			&lt;!&ndash; 全局方言变量注入properties文件方式 &ndash;&gt;-->
+<!--			&lt;!&ndash; <property name="oracle" value="classpath:conf/dialect.oracle.properties"/> &ndash;&gt;-->
+<!--			&lt;!&ndash; 扫描变量的base package,不支持通配符,可以使用,或者;进行分隔&ndash;&gt;-->
+<!--			<property name="scan-packages" value="com.study_project.my"/>-->
+<!--		</plugin>-->
+		<!-- 方言函数插件 -->
+<!--		<plugin interceptor="com.ithinkdt.plugin.mybatis.plugin.DialectStatement">-->
+<!--		</plugin>-->
+<!--	</plugins>-->
+</configuration>

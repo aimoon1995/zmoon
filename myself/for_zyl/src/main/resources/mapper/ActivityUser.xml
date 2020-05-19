@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+        <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.project_study.my.for_my.mapper.ActivityUserMapper">
+
+    <resultMap id="BaseResultMap" type="com.project_study.my.for_my.entity.ActivityUser">
+        <id column="uuid" jdbcType="VARCHAR" property="uuid" />
+        <result column="activity_id" jdbcType="VARCHAR" property="activityId" />
+        <result column="user_id" jdbcType="VARCHAR" property="userId" />
+        <result column="join_count" jdbcType="INTEGER" property="joinCount" />
+        <result column="share_count" jdbcType="INTEGER" property="shareCount" />
+        <result column="share_user" jdbcType="VARCHAR" property="shareUser" />
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+        <result column="remain_count" jdbcType="INTEGER" property="remainCount" />
+    </resultMap>
+
+
+    <sql id="Base_Column_List">
+        uuid, activity_id, user_id, join_count, share_count, share_user, update_time, create_time,
+        remain_count
+    </sql>
+
+
+    <delete id="delete" parameterType="java.lang.String">
+        delete from activity_user
+        where uuid = #{uuid,jdbcType=VARCHAR}
+    </delete>
+
+
+    <insert id="insert" parameterType="com.project_study.my.for_my.entity.ActivityUser">
+        insert into activity_user (uuid, activity_id, user_id,
+        join_count, share_count, share_user,
+        update_time, create_time, remain_count
+        )
+        values (#{uuid,jdbcType=VARCHAR}, #{activityId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR},
+        #{joinCount,jdbcType=INTEGER}, #{shareCount,jdbcType=INTEGER}, #{shareUser,jdbcType=VARCHAR},
+        #{updateTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}, #{remainCount,jdbcType=INTEGER}
+        )
+    </insert>
+
+
+    <insert id="insertDynamic" parameterType="com.project_study.my.for_my.entity.ActivityUser">
+        insert into activity_user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="uuid != null">
+                uuid,
+            </if>
+            <if test="activityId != null">
+                activity_id,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="joinCount != null">
+                join_count,
+            </if>
+            <if test="shareCount != null">
+                share_count,
+            </if>
+            <if test="shareUser != null">
+                share_user,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="remainCount != null">
+                remain_count,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="uuid != null">
+                #{uuid,jdbcType=VARCHAR},
+            </if>
+            <if test="activityId != null">
+                #{activityId,jdbcType=VARCHAR},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=VARCHAR},
+            </if>
+            <if test="joinCount != null">
+                #{joinCount,jdbcType=INTEGER},
+            </if>
+            <if test="shareCount != null">
+                #{shareCount,jdbcType=INTEGER},
+            </if>
+            <if test="shareUser != null">
+                #{shareUser,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="remainCount != null">
+                #{remainCount,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+
+
+    <update id="updateDynamic" parameterType="com.project_study.my.for_my.entity.ActivityUser">
+        update activity_user
+        <set>
+            <if test="activityId != null">
+                activity_id = #{activityId,jdbcType=VARCHAR},
+            </if>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=VARCHAR},
+            </if>
+            <if test="joinCount != null">
+                join_count = #{joinCount,jdbcType=INTEGER},
+            </if>
+            <if test="shareCount != null">
+                share_count = #{shareCount,jdbcType=INTEGER},
+            </if>
+            <if test="shareUser != null">
+                share_user = #{shareUser,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="remainCount != null">
+                remain_count = #{remainCount,jdbcType=INTEGER},
+            </if>
+        </set>
+        where uuid = #{uuid,jdbcType=VARCHAR}
+    </update>
+
+
+    <update id="update" parameterType="com.project_study.my.for_my.entity.ActivityUser">
+        update activity_user
+        set activity_id = #{activityId,jdbcType=VARCHAR},
+        user_id = #{userId,jdbcType=VARCHAR},
+        join_count = #{joinCount,jdbcType=INTEGER},
+        share_count = #{shareCount,jdbcType=INTEGER},
+        share_user = #{shareUser,jdbcType=VARCHAR},
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+        remain_count = #{remainCount,jdbcType=INTEGER}
+        where uuid = #{uuid,jdbcType=VARCHAR}
+    </update>
+
+
+    <select id="selectByUuid"  resultType="com.project_study.my.for_my.entity.ActivityUser">
+        select
+        *
+        from  activity_user
+
+    </select>
+
+
+    <sql id="findPageWithWhere">
+        <where> 1=1
+            <if test="uuid != null and uuid != ''" >
+                and uuid = #{uuid,jdbcType=VARCHAR}
+            </if>
+            <if test="activityId != null and activityId != ''" >
+                and activity_id = #{activityId,jdbcType=VARCHAR}
+            </if>
+            <if test="userId != null and userId != ''" >
+                and user_id = #{userId,jdbcType=VARCHAR}
+            </if>
+            <if test="joinCount != null" >
+                and join_count = #{joinCount,jdbcType=INTEGER}
+            </if>
+            <if test="shareCount != null" >
+                and share_count = #{shareCount,jdbcType=INTEGER}
+            </if>
+            <if test="shareUser != null and shareUser != ''" >
+                and share_user = #{shareUser,jdbcType=VARCHAR}
+            </if>
+            <if test="updateTime != null" >
+                and update_time = #{updateTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="createTime != null" >
+                and create_time = #{createTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="remainCount != null" >
+                and remain_count = #{remainCount,jdbcType=INTEGER}
+            </if>
+        </where>
+    </sql>
+
+
+    <select id="queryUserByPage" parameterType="com.project_study.my.common.param.BaseParam" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from  activity_user
+    </select>
+
+
+    <select id="findPageWithCount" parameterType="com.project_study.my.for_my.entity.ActivityUser" resultType="Integer">
+        select count(1)
+        from activity_user
+        <include refid="findPageWithWhere" />
+    </select>
+
+</mapper>

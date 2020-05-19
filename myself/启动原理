@@ -1,0 +1,18 @@
+starter族场景包,导入场景所需依赖包
+
+主要
+@SpringBootApplication注解  和  run方法：
+
+    @SpringBootApplication注解
+          这个注解是个组合注解
+          主要
+          @ComponentScan  用于进行包扫描和组件装配，检查类是否使用了@Controller，@Service等注解，有则获取这些类创建对应的bean对象注册到Spring容器
+             这个注解在Spring中很重要，它对应XML配置中的元素，@ComponentScan的功能其实就是自动扫描并加载符合条件的组件（比如@Component和@Repository等）或者bean定义，最终将这些bean定义加载到IoC容器中。
+             我们可以通过basePackages等属性来细粒度的定制@ComponentScan自动扫描的范围，如果不指定，则默认Spring框架实现会从声明@ComponentScan所在类的package进行扫描。
+             所以SpringBoot的启动类最好是放在root package下，因为默认不指定basePackages。
+          @SpringBootConfiguration  配置类
+          @EnableAutoConfiguration    组合注解
+           主要
+             @AutoConfigurationPackage    将启动类所在包以及下面所有子包的组件扫描到spring容器
+             @Import({AutoConfigurationImportSelector.class})
+

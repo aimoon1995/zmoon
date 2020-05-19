@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.project_study.my.quartz.mapper.QuartzJobMapper">
+
+	<resultMap id="SysQuartzJobMapping" type="com.project_study.my.quartz.entity.SysQuartzJobEntity">
+		<id column="id" property="id"/>
+		<result property="jobName" column="job_name" />
+		<result property="jobGroup" column="job_group" />
+		<result property="cronExpression" column="cron_expression" />
+		<result property="jobClassName" column="job_class_name" />
+		<result property="jobDescription" column="job_description" />
+		<result property="jobStatus" column="job_status" />
+		<result property="intervalTime" column="interval_time" />
+		<result property="triggerType" column="trigger_type" />
+		<result property="executingHostName" column="executing_host_name" />
+		<result property="jobData" column="job_data" />
+		<result column="create_date" property="createDate"/>
+		<result column="create_user" property="createUser"/>
+		<result column="update_date" property="updateDate"/>
+		<result column="update_user" property="updateUser"/>
+	</resultMap>
+
+
+	<insert id="insert" parameterType="com.project_study.my.quartz.entity.SysQuartzJobEntity">
+			INSERT INTO t_sys_quartz_job (
+				id,
+				job_name,
+				job_group,
+				cron_expression,
+				job_class_name,
+				job_description,
+				job_status,
+				interval_time,
+				trigger_type,
+				executing_host_name,
+				job_data,
+				create_date,
+				create_user,
+				update_date,
+				update_user
+			)
+			VALUES
+				(
+				 	#{id}
+					,
+					#{jobName}
+					,
+					#{jobGroup}
+					,
+					#{cronExpression}
+					,
+					#{jobClassName}
+					,
+					#{jobDescription}
+					,
+					#{jobStatus}
+					,
+					#{intervalTime}
+					,
+					#{triggerType}
+					,
+					#{executingHostName}
+					,
+					#{jobData}
+					,
+					#{createDate}
+					,
+            		#{createUser}
+            		,
+            		#{updateDate}
+            		,
+            		#{updateUser}
+				)
+	</insert>
+
+	<select id="selectOneData" resultMap="SysQuartzJobMapping" >
+		select
+			  t.id
+			, t.job_name
+			, t.job_group
+			, t.cron_expression
+			, t.job_class_name
+			, t.job_description
+			, t.job_status
+			, t.interval_time
+			, t.trigger_type
+			, t.executing_host_name
+			, t.job_data
+			, t.create_date
+			, t.update_date
+			, t.create_user
+			, t.update_user
+		from
+			t_sys_quartz_job t
+		where
+		<if test="param.jobName != null and param.jobName != ''">
+			 t.job_name = #{param.jobName}
+		</if>
+		<if test="param.jobGroup != null and param.jobGroup != ''">
+			and t.job_group = #{param.jobGroup}
+		</if>
+	</select>
+
+	<select id="selectList" resultMap="SysQuartzJobMapping" >
+		select
+		t.id
+		, t.job_name
+		, t.job_group
+		, t.cron_expression
+		, t.job_class_name
+		, t.job_description
+		, t.job_status
+		, t.interval_time
+		, t.trigger_type
+		, t.executing_host_name
+		, t.job_data
+		, t.create_date
+		, t.update_date
+		, t.create_user
+		, t.update_user
+		from
+		t_sys_quartz_job t
+		<where>
+			<if test="param.jobName != null and param.jobName != ''">
+				AND t.job_name LIKE CONCAT(CONCAT('%',#{param.jobName},'%'))
+			</if>
+			<if test="param.jobGroup != null and param.jobGroup != ''">
+				AND t.job_group LIKE CONCAT(CONCAT('%',#{param.jobGroup},'%'))
+			</if>
+			<if test="param.jobStatus != null and param.jobStatus != ''">
+				AND  t.job_status = #{param.jobStatus}
+			</if>
+			<if test="param.intervalTime != null and param.intervalTime != ''">
+				AND  t.interval_time = #{param.intervalTime}
+			</if>
+			<if test="param.triggerType != null and param.triggerType != ''">
+				AND  t.trigger_type = #{param.triggerType}
+			</if>
+		</where>
+	</select>
+
+	<update id="update" parameterType="com.project_study.my.quartz.entity.SysQuartzJobEntity">
+		update
+			t_sys_quartz_job t
+		<set>
+			t.id = #{param.id}
+			<if test="param.cronExpression != null and param.cronExpression != ''">
+				, t.cron_expression = #{param.cronExpression}
+			</if>
+			<if test="param.intervalTime != null and param.intervalTime != ''">
+				, t.interval_Time = #{param.intervalTime}
+			</if>
+			<if test="param.triggerType != null and param.triggerType != ''">
+				, t.trigger_type = #{param.triggerType}
+			</if>
+
+			<if test="param.jobData != null and param.jobData != ''">
+				, t.job_data = #{param.jobData}
+			</if>
+
+			<if test="param.updateDate != null and param.updateDate != ''">
+				, t.update_date = #{param.updateDate}
+			</if>
+			<if test="param.updateUser != null and param.updateUser != ''">
+				, t.update_user = #{param.updateUser}
+			</if>
+		</set>
+		where
+			t.id = #{param.id}
+	</update>
+
+
+	<update id="updateJobStatus" parameterType="com.project_study.my.quartz.entity.SysQuartzJobEntity">
+		update
+		t_sys_quartz_job
+		SET job_status = #{param.jobStatus}
+		where
+		id=#{param.id}
+	</update>
+
+	<delete id="delete">
+		delete	from
+			t_sys_quartz_job
+		where
+			id = #{id}
+	</delete>
+   </mapper>
